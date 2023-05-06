@@ -1,5 +1,5 @@
+from .models import Products, Cart
 from rest_framework import serializers
-from .models import Products
 
 
 class ShortDateSerializerField(serializers.DateTimeField):
@@ -12,3 +12,16 @@ class GetProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
         fields = '__all__'
+
+
+
+class GetCartSerializer(serializers.ModelSerializer):
+    items = GetProductsSerializer(many=True)
+    class Meta:
+        model = Cart
+        fields = ['id', 'status', 'total', 'items', 'created_at', 'updated_at']
+        
+class PostCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['owner','status','items']

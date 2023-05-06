@@ -155,8 +155,8 @@ Code challenge for Skyloov Property Portal
       "quantity": 1,
       "image": null,
       "rating": 5.0,
-      "created_at": "2023-05-06T00:04:45.270535Z",
-      "updated_at": "2023-05-06T01:27:35.756708Z"
+      "created_at": "2023-05-06",
+      "updated_at": "2023-05-06"
     }
   ]
 }
