@@ -27,7 +27,6 @@ class ProductsFilterView(generics.ListAPIView):
         return self.filter_class(self.request.GET, queryset=queryset).qs
 
 
-
 class GetCartListView(generics.ListAPIView):
     """
         List all the carts with the owner that make the request
@@ -41,7 +40,7 @@ class GetCartListView(generics.ListAPIView):
         return get_list_or_404(Cart, owner=self.request.user)
     
     
-class PostCartView(APIView):
+class CreateCartView(APIView):
     """
         Create cart instance view
     """
@@ -51,7 +50,6 @@ class PostCartView(APIView):
     def post(self, request, format=None):
         
         data=request.data
-        print(data)
         data.update({'owner': request.user.id})
         serializer = PostCartSerializer(data=data)
         if serializer.is_valid():
@@ -59,3 +57,32 @@ class PostCartView(APIView):
             cart_data = GetCartSerializer(serializer.instance).data
             return Response(cart_data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+
+class CartView(APIView):
+    """
+        Cart view for get, update and delete cart instance, if the request.user is the owner
+    """
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+        
+    def get(self, request, pk, format=None):
+        cart = get_object_or_404(Cart, pk=pk, owner=request.user)
+        serializer = GetCartSerializer(cart)
+        return Response(serializer.data) 
+    
+    def put(self, request, pk, format=None):
+        cart = get_object_or_404(Cart, pk=pk, owner=request.user)
+        serializer = PostCartSerializer(cart, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            cart_data = GetCartSerializer(serializer.instance).data
+            return Response(cart_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    
+    def delete(self, request, pk, format=None):
+        cart = get_object_or_404(Cart, pk=pk, owner=request.user)
+        cart.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+            
