@@ -53,3 +53,11 @@ Django, Django Rest Framework ....
 
    - > Enter the username and password for the admin pannel 
 
+
+
+/products/search/?name=test1
+/products/search/?brand=zz
+/products/search/?category=a
+/products/search/?min_price=0&max_price=100
+/products/search/?min_quantity=0&max_quantity=10
+/products/search/?created_at=2023-05-05
