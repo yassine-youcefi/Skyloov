@@ -61,3 +61,4 @@ Django, Django Rest Framework ....
 /products/search/?min_price=0&max_price=100
 /products/search/?min_quantity=0&max_quantity=10
 /products/search/?created_at=2023-05-05
+/products/search/?rating=5

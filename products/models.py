@@ -3,8 +3,7 @@ from django.db import models
 
 class Products(models.Model):
 
-    name = models.CharField(max_length=255, blank=True,
-                            null=True, default=None)
+    name = models.CharField(max_length=255)
 
     brand = models.CharField(max_length=255, blank=True,
                              null=True, default=None)
@@ -20,6 +19,8 @@ class Products(models.Model):
 
     image = models.ImageField(upload_to='products/', blank=True,
                               null=True, default=None)
+    
+    rating = models.FloatField(default=0.0)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

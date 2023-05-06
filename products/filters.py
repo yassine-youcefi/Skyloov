@@ -21,10 +21,12 @@ class ProductsFilter(filters.FilterSet):
     max_quantity = filters.NumberFilter(
         field_name='quantity', lookup_expr='lte')
 
+    rating = filters.NumberFilter(field_name='rating', lookup_expr='exact')
+
     created_at = filters.DateFilter(
         field_name="created_at", lookup_expr='date')
 
     class Meta:
         model = Products
-        fields = ['name', 'brand', 'category', 'min_price',
-                  'max_price', 'min_quantity', 'max_quantity', 'created_at']
+        fields = ['name', 'brand', 'category', 'min_price', 'max_price',
+                  'min_quantity', 'max_quantity', 'created_at', 'rating']
