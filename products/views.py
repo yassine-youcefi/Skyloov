@@ -9,6 +9,7 @@ from .serializers import GetProductsSerializer, GetCartSerializer, PostCartSeria
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -24,7 +25,17 @@ class ProductsFilterView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = Products.objects.all()
-        return self.filter_class(self.request.GET, queryset=queryset).qs
+        filter_queryset = self.filter_class(self.request.GET, queryset=queryset).qs
+        
+        sort = self.request.query_params.get('sort', None)
+        if sort:
+            try:
+                filter_queryset = filter_queryset.order_by(sort)
+            except:
+                raise ValidationError({'detail': 'Invalid value for sort parameter.'})
+                
+                     
+        return filter_queryset
 
 
 class GetCartListView(generics.ListAPIView):

@@ -75,14 +75,3 @@ class Cart(models.Model):
         total = self.items.aggregate(total=Sum('price'))
         return total["total"] or 0
 
-    def add_product(self, product):
-        self.products.add(product)
-        self.save()
-
-    def remove_product(self, product):
-        self.products.remove(product)
-        self.save()
-
-    def clear(self):
-        self.products.clear()
-        self.save()

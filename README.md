@@ -50,6 +50,12 @@ Code challenge for Skyloov Property Portal
 
    - > Enter the username and password for the admin pannel
 
+3. If you want to run the tests:
+
+   - `python manage.py pytest`
+
+
+
 <br>
 <hr>
 <br>
@@ -191,3 +197,6 @@ Code challenge for Skyloov Property Portal
   - created_at :
     
     <http://localhost:8000/products/search/?created_at=2023-05-05>
+
+- You can also sort the results : 
+    <http://localhost:8000/products/search/?sort=name>
