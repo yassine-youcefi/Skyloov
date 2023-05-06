@@ -1,35 +1,32 @@
 # Overview
 
 ## Skyloov
- Code challenge for Skyloov Property Portal
 
-## Technologies i used
-
-I used Python(3) as Primary language .
-
-## Framework
-
-Django, Django Rest Framework ....
+Code challenge for Skyloov Property Portal
 
 ## Requirements
 
-- [Docker file](http://192.168.1.146/neo/neo-api/-/blob/dev/Dockerfile)
+- [Docker file](https://github.com/yassine-youcefi/Skyloov/blob/main/Dockerfile)
 
   > Contain docker global config ...
 
-- [Docker-compose](http://192.168.1.146/neo/neo-api/-/blob/dev/docker-compose.yml)
+- [Docker-compose](https://github.com/yassine-youcefi/Skyloov/blob/main/docker-compose.yml)
 
   > My docker containers configuration ...
 
-- [requirements.txt](http://192.168.1.146/neo/neo-api/-/blob/dev/requirements.txt)
+- [requirements.txt](https://github.com/yassine-youcefi/Skyloov/blob/main/requirements.txt)
 
   > All python requirements ...
+
+- `.env`
+
+  > Project environment variables
 
 <br>
 <hr>
 <br>
 
-### Start-up
+## Start-up
 
 > Pleas follow the steps below.
 
@@ -39,10 +36,10 @@ Django, Django Rest Framework ....
    - `docker-compose up`
      > Now our API server start ...
    - `docker exec -it skyloov bash`
+
      > To accesses skyloov app container bash
 
-
-   - `python3 -c 'import secrets; print(secrets.token_urlsafe(38))'` 
+   - `python3 -c 'import secrets; print(secrets.token_urlsafe(38))'`
      > Generate a SecretKey
      > Please turn the DEBUG to False (if u wanna try the prod mode) in settings.py
 
@@ -51,14 +48,146 @@ Django, Django Rest Framework ....
    - `python manage.py migrate`
    - `python manage.py createsuperuser`
 
-   - > Enter the username and password for the admin pannel 
+   - > Enter the username and password for the admin pannel
 
+<br>
+<hr>
+<br>
 
+## Connect Application :
 
-/products/search/?name=test1
-/products/search/?brand=zz
-/products/search/?category=a
-/products/search/?min_price=0&max_price=100
-/products/search/?min_quantity=0&max_quantity=10
-/products/search/?created_at=2023-05-05
-/products/search/?rating=5
+### End-point : connect token
+
+- For obtaining a token we should send a POST request to API. Request body must have two parts : username and password.
+
+#### Method: POST
+
+<http://localhost:8000/connect/token/>
+
+#### Headers
+
+| Content-Type | Value            |
+| ------------ | ---------------- |
+| Content-Type | application/json |
+
+#### Body (**raw**)
+
+```json
+{
+  "username": "***",
+  "password": "***"
+}
+```
+
+#### Response (**raw**)
+
+```json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+### End-point: connect token refresh
+
+- To refresh the JWT token, you can send a POST request to the token refresh endpoint with the refresh token in the request body.
+
+#### Method: GET
+
+<http://localhost:8000/connect/token/refresh/>
+
+#### Body (**raw**)
+
+```json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### Response (**raw**)
+
+```json
+{
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+<br>
+<hr>
+<br>
+
+## Products Application :
+
+### End-point: products search
+
+#### Method: GET
+
+<http://localhost:8000/products/search/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <tour_token> | string |
+
+> NOTE: This view return paginated response, 20 products per page.
+
+#### Response (**raw**)
+
+- The response will look like this for example:
+
+```json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "name": "test",
+      "brand": "test",
+      "description": "test",
+      "category": "test",
+      "price": "0.00",
+      "quantity": 1,
+      "image": null,
+      "rating": 5.0,
+      "created_at": "2023-05-06T00:04:45.270535Z",
+      "updated_at": "2023-05-06T01:27:35.756708Z"
+    }
+  ]
+}
+```
+
+- Here are some sample GET requests for each field :
+
+  - name :
+    
+    <http://localhost:8000/products/search/?name=test>
+
+  - brand :
+    
+    <http://localhost:8000/products/search/?brand=test>
+
+  - category :
+    
+    <http://localhost:8000/products/search/?category=test>
+
+  - price :
+    
+    <http://localhost:8000/products/search/?min_price=0&max_price=100>
+
+  - quantity :
+    
+    <http://localhost:8000/products/search/?min_quantity=0&max_quantity=10>
+
+  - rating :
+    
+    <http://localhost:8000/products/search/?rating=5>
+
+  - created_at :
+    
+    <http://localhost:8000/products/search/?created_at=2023-05-05>

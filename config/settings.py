@@ -22,11 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Third party apps
     'rest_framework',
     'django_filters',
-    
+
     # Local apps
     'products',
     'connect'
@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',  
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -82,15 +82,16 @@ SIMPLE_JWT = {
 
 
 DATABASES = {
-'default': {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME':os.environ.get("DB_NAME"),
-    'USER': os.environ.get("DB_USER"),
-    'PASSWORD': os.environ.get("DB_PASSWORD"),
-    'HOST': os.environ.get("DB_HOST"),
-    'PORT':  os.environ.get("DB_PORT"),
-    'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
-},} 
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT':  os.environ.get("DB_PORT"),
+        'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
+    },
+}
 
 
 # Password validation
