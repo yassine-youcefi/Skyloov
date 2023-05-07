@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     # Third party apps
     'rest_framework',
     'django_filters',
-    # 'rest_framework_swagger',
     'drf_yasg',
 
     # Local apps
@@ -110,6 +109,14 @@ DATABASES = {
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     },
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 # Password validation

@@ -14,8 +14,8 @@ RUN apt install libpq-dev nginx -y
 WORKDIR /code 
 COPY requirements.txt /code/
 RUN pip install --upgrade pip
-RUN --mount=type=cache,target=/root/.cache \    
-    pip install -r requirements.txt 
+# RUN --mount=type=cache,target=/root/.cache \    
+RUN    pip install -r requirements.txt 
 
 
 EXPOSE 8080
