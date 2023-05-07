@@ -1,9 +1,17 @@
 # Overview
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) 
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) 
+![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
 
-## Skyloov
+## Skyloov :  
+### Code challenge for Skyloov Property Portal, This is some of useful links for reviewing and testing the project : 
 
-Code challenge for Skyloov Property Portal
-
+- [Swagger documentation](http://localhost:8000/swagger/)  
+- [redocs documentation](http://localhost:8000/redocs/) 
 ## Requirements
 
 - [Docker file](https://github.com/yassine-youcefi/Skyloov/blob/main/Dockerfile)
@@ -85,7 +93,7 @@ Code challenge for Skyloov Property Portal
 }
 ```
 
-#### Response (**raw**)
+#### Response (**raw**) 200
 
 ```json
 {
@@ -93,6 +101,33 @@ Code challenge for Skyloov Property Portal
   "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+### End-point : connect verify token
+
+- For verify a token we should send a POST request to API. Request body must have two parts : token.
+
+#### Method: POST
+
+<http://localhost:8000/connect/api/token/verify/>
+
+#### Headers
+
+| Content-Type | Value            |
+| ------------ | ---------------- |
+| Content-Type | application/json |
+
+#### Body (**raw**)
+
+```json
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+}
+```
+
+#### Response (**raw**) 200
+``
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -112,7 +147,7 @@ Code challenge for Skyloov Property Portal
 }
 ```
 
-#### Response (**raw**)
+#### Response (**raw**) 200
 
 ```json
 {

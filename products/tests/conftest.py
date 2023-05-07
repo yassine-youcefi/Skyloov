@@ -32,6 +32,5 @@ def product():
         price=50.0,
         quantity=4,
         rating=4.5,
-        created_at="2023/05/06"
     )
     

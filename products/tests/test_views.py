@@ -138,7 +138,7 @@ class TestProductsFilter:
         """
 
         url = reverse("products-search")
-        created_at = datetime(2023, 5, 6).strftime('%Y/%m/%d')
+        created_at = datetime.now().strftime('%Y/%m/%d')
         response = client.get(f"{url}?created_at={created_at}")
         assert response.status_code == 200
         assert response.data['results'][0]['created_at'] == created_at
