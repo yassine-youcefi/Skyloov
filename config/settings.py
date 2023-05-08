@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',
+    'celery',
 
     # Local apps
     'products',
@@ -109,6 +110,26 @@ DATABASES = {
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     },
 }
+
+
+
+REDIS_URL = "redis://{host}:{port}/1".format(
+    host=os.getenv("REDIS_HOST", "localhost"), port=os.getenv("REDIS_PORT", "6379")
+)
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_URL,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
+
+
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

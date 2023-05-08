@@ -2,7 +2,7 @@ version: "3"
 services:
 
   web:
-    container_name: skyloov
+    container_name: skyloov-django
     build:
       context: .
       dockerfile: Dockerfile
@@ -19,6 +19,28 @@ services:
     tty: true
     depends_on:
       - db
+      - redis
+
+
+  redis:
+    container_name: skyloov-redis
+    image: redis
+    user: redis
+    restart: always
+    
+
+  celery:
+    container_name: skyloov-celery
+    build: .
+    env_file: .env
+    command: celery -A config worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+    restart: always
+
+
   db:
     image: mysql:latest
     container_name: skyloov-db

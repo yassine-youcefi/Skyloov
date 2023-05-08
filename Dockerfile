@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.2.1
 
-FROM python:3
+FROM python:3.10
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
