@@ -39,31 +39,59 @@
 
 ## Start-up
 
-> Pleas follow the steps below.
+### Pleas follow the steps below.
 
+<br>
 1. clone repo then open terminal
 
-   - `docker-compose build`
-   - `docker-compose up`
-     > Now our API server start ...
-   - `docker exec -it skyloov bash`
+```bash
+docker-compose build
+```
 
-     > To accesses skyloov app container bash
+```bash
+docker-compose up
+```
 
-   - `python3 -c 'import secrets; print(secrets.token_urlsafe(38))'`
-     > Generate a SecretKey
-     > Please turn the DEBUG to False (if u wanna try the prod mode) in settings.py
+  > Now our API server start ...
+   > To accesses skyloov app container bash
 
-2. After lunching the skyloov app container and got into it:
+```bash
+docker exec -it skyloov bash
+```
 
-   - `python manage.py migrate`
-   - `python manage.py createsuperuser`
+   > Generate a SecretKey
+   > Please turn the DEBUG to False (if u wanna try the prod mode) in settings.py
 
-   - > Enter the username and password for the admin pannel
+```bash
+python3 -c 'import secrets; print(secrets.token_urlsafe(38))'
+```
 
-3. If you want to run the tests:
 
-   - `python manage.py pytest`
+<br>
+
+2.After lunching the skyloov app container and got into it:
+> To migrate the database
+```bash
+python manage.py migrate
+```
+> To collect static files
+```bash
+python manage.py collectstatic
+```
+
+> Enter the username and password for the admin pannel
+```bash
+python manage.py createsuperuser
+```
+
+
+<br>
+
+3.If you want to run the tests:
+
+```bash
+python manage.py pytest
+```
 
 <br>
 <hr>
