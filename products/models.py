@@ -74,4 +74,11 @@ class Cart(models.Model):
     def total(self):
         total = self.items.aggregate(total=Sum('price'))
         return total["total"] or 0
+    
+    def remove_product(self, product):
+        """
+        Removes the specified product from the cart's items
+        """
+        self.items.remove(product)
+    
 

@@ -11,5 +11,6 @@ def user_welcome(sender, instance, created, **kwargs):
         send email welcome 
     '''
     if created:
+        print('-------------- aze /// ',instance.email)
         send_mail = MailUtil(instance, str(instance.email))
         send_mail.send_email_welcome()

@@ -1,16 +1,18 @@
+import warnings
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 from .models import Products, Cart
 from .filters import ProductsFilter
 from .pagination import CustomPageNumber
-from .serializers import GetProductsSerializer, GetCartSerializer, PostCartSerializer
+from .serializers import GetProductsSerializer, GetCartSerializer, PostCartSerializer, CartItemsSerializer
 
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
+
 
 
 class ProductsFilterView(generics.ListAPIView):
@@ -39,6 +41,7 @@ class ProductsFilterView(generics.ListAPIView):
         return filter_queryset
 
 
+
 class GetCartListView(generics.ListAPIView):
     """
         List all the carts with the owner that make the request
@@ -49,48 +52,81 @@ class GetCartListView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        return get_list_or_404(Cart, owner=self.request.user)
+        return Cart.objects.filter(owner=self.request.user)
+        
 
 
-class CreateCartView(APIView):
+class CreateCartView(generics.CreateAPIView):
     """
-        Create cart instance view
-    """
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, format=None):
-
-        data = request.data
-        data.update({'owner': request.user.id})
-        serializer = PostCartSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            cart_data = GetCartSerializer(serializer.instance).data
-            return Response(cart_data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class CartView(APIView):
-    """
-        Cart view for get, update and delete cart instance, if the request.user is the owner
+    Create cart instance view
     """
     permission_classes = [IsAuthenticated]
+    serializer_class = PostCartSerializer
 
-    def get(self, request, pk, format=None):
-        cart = get_object_or_404(Cart, pk=pk, owner=request.user)
-        serializer = GetCartSerializer(cart)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+    def get_serializer_context(self):
+        """
+        Extra context provided to the serializer class.
+        """
+        context = super().get_serializer_context()
+        context['owner'] = self.request.user
+        return context
+
+
+
+class CartView(generics.RetrieveDestroyAPIView):
+    """
+        Cart view for get and delete cart instance, if the request.user is the owner
+    """
+    permission_classes = [IsAuthenticated]
+    serializer_class = GetCartSerializer
+    queryset = Cart.objects.all()
+
+    def get_object(self):
+        return get_object_or_404(Cart, pk=self.kwargs['pk'], owner=self.request.user)    
+    
+
+
+class CartItemsView(generics.RetrieveUpdateDestroyAPIView):
+    """
+        Cart items view for update and delete items in cart instance,
+        if the request.user is the owner
+    """
+    serializer_class = CartItemsSerializer
+    queryset = Cart.objects.all()
+    permission_classes = [IsAuthenticated]
+    
+    
+    def get_object(self):
+        return get_object_or_404(Cart, pk=self.kwargs['pk'], owner=self.request.user)
+    
+    
+    def delete(self, request, *args, **kwargs):
+        """
+        Remove one or more items from the cart
+        """
+        cart = self.get_object()
+        items = request.data.get("items", [])
+
+        if not isinstance(items, list):
+            return Response(
+                {"items": ["Items must be a list"]},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Remove each item from the cart
+        for item_id in items:
+            try:
+                product = Products.objects.get(id=item_id)
+                cart.remove_product(product)
+            except product.DoesNotExist:
+                pass  # Ignore items that do not exist
+
+        # Serialize the updated cart and return a response
+        serializer = self.get_serializer(cart)
         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        cart = get_object_or_404(Cart, pk=pk, owner=request.user)
-        serializer = PostCartSerializer(cart, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            cart_data = GetCartSerializer(serializer.instance).data
-            return Response(cart_data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        cart = get_object_or_404(Cart, pk=pk, owner=request.user)
-        cart.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+warnings.filterwarnings("ignore", message="<class 'products.views.GetCartListView'> is not compatible with schema generation")

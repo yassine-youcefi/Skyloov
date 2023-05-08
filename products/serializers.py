@@ -25,3 +25,9 @@ class PostCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ['owner','status','items']
+
+
+class CartItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['items']

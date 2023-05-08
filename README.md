@@ -235,3 +235,9 @@
 
 - You can also sort the results : 
     <http://localhost:8000/products/search/?sort=name>
+
+
+
+
+
+![alt text](email.png)
