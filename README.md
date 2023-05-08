@@ -1,17 +1,20 @@
 # Overview
+
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) 
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) 
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
 
-## Skyloov :  
-### Code challenge for Skyloov Property Portal, This is some of useful links for reviewing and testing the project : 
+## Skyloov :
 
-- [Swagger documentation](http://localhost:8000/swagger/)  
-- [redocs documentation](http://localhost:8000/redocs/) 
+### Code challenge for Skyloov Property Portal, This is some of useful links for reviewing and testing the project :
+
+- [Swagger documentation](http://localhost:8000/swagger/)
+- [redocs documentation](http://localhost:8000/redocs/)
+
 ## Requirements
 
 - [Docker file](https://github.com/yassine-youcefi/Skyloov/blob/main/Dockerfile)
@@ -62,8 +65,6 @@
 
    - `python manage.py pytest`
 
-
-
 <br>
 <hr>
 <br>
@@ -88,8 +89,8 @@
 
 ```json
 {
-  "username": "***",
-  "password": "***"
+  "username": "string",
+  "password": "string"
 }
 ```
 
@@ -122,11 +123,12 @@
 
 ```json
 {
-    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
 }
 ```
 
 #### Response (**raw**) 200
+
 ``
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -156,6 +158,40 @@
 }
 ```
 
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+### End-point : connect signup
+
+- Signup endpoit, allow user registration
+
+#### Method: POST
+
+<http://localhost:8000/connect/signup/>
+
+#### Body (**raw**)
+
+```json
+{
+  "username": "string",
+  "password": "string",
+  "email": "string@gmail.com"
+}
+```
+
+#### Response (**raw**) 200
+
+```json
+{
+  "username": "string",
+  "password": "string",
+  "email": "string@gmail.com"
+}
+```
+
+- NOTE : After the registration, the user will receive the bellow email :
+
+  ![alt text](email.png)
+
 <br>
 <hr>
 <br>
@@ -172,7 +208,7 @@
 
 | Param | value        | Type   |
 | ----- | ------------ | ------ |
-| token | <tour_token> | string |
+| token | <your_token> | berear |
 
 > NOTE: This view return paginated response, 20 products per page.
 
@@ -206,38 +242,275 @@
 - Here are some sample GET requests for each field :
 
   - name :
-    
+
     <http://localhost:8000/products/search/?name=test>
 
   - brand :
-    
+
     <http://localhost:8000/products/search/?brand=test>
 
   - category :
-    
+
     <http://localhost:8000/products/search/?category=test>
 
   - price :
-    
+
     <http://localhost:8000/products/search/?min_price=0&max_price=100>
 
   - quantity :
-    
+
     <http://localhost:8000/products/search/?min_quantity=0&max_quantity=10>
 
   - rating :
-    
+
     <http://localhost:8000/products/search/?rating=5>
 
   - created_at :
-    
+
     <http://localhost:8000/products/search/?created_at=2023-05-05>
 
-- You can also sort the results : 
-    <http://localhost:8000/products/search/?sort=name>
+- You can also sort the results :
+  <http://localhost:8000/products/search/?sort=name>
 
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
+### End-point: cart list
 
+#### Method: GET
 
+<http://localhost:8000/products/cart/all/>
 
-![alt text](email.png)
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+> NOTE: This view return paginated response, 20 products per page.
+> The returned carts responses are bellow to the request user
+
+#### Response (**raw**)
+
+- The response will look like this for example:
+
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 8,
+            "status": "OPEN",
+            "total": 2.0,
+            "items": [
+                {
+                    "id": 2,
+                    "created_at": "2023/05/06",
+                    "updated_at": "2023/05/06",
+                    "name": "string",
+                    "brand": "string",
+                    "description": "string",
+                    "category": "string",
+                    "price": "2.00",
+                    "quantity": 0,
+                    "image": null,
+                    "rating": 0.0
+                }
+            ],
+            "created_at": "2023-05-07T20:15:06.872987Z",
+            "updated_at": "2023-05-07T20:15:06.873015Z"
+        },
+        ...
+    ]
+}
+```
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+### End-point: cart details
+
+#### Method: GET
+
+<http://localhost:8000/products/cart/8/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+> NOTE: This view return paginated response, 20 products per page.
+> The returned carts responses are bellow to the request user
+
+#### Response (**raw**)
+
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 8,
+            "status": "OPEN",
+            "total": 2.0,
+            "items": [
+                {
+                    "id": 2,
+                    "created_at": "2023/05/06",
+                    "updated_at": "2023/05/06",
+                    "name": "string",
+                    "brand": "string",
+                    "description": "string",
+                    "category": "string",
+                    "price": "2.00",
+                    "quantity": 0,
+                    "image": null,
+                    "rating": 0.0
+                }
+            ],
+            "created_at": "2023-05-07T20:15:06.872987Z",
+            "updated_at": "2023-05-07T20:15:06.873015Z"
+        },
+        ...
+    ]
+}
+```
+
+#### Method: post
+
+<http://localhost:8000/products/cart/create/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Body (**raw**)
+
+- you need to pass the product id in the items list
+
+```json
+{
+  "items": [2]
+}
+```
+
+#### Response (**raw**)
+
+```json
+{
+  "id": 8,
+  "status": "OPEN",
+  "total": 2.0,
+  "items": [
+    {
+      "id": 2,
+      "created_at": "2023/05/06",
+      "updated_at": "2023/05/06",
+      "name": "string",
+      "brand": "string",
+      "description": "string",
+      "category": "string",
+      "price": "2.00",
+      "quantity": 0,
+      "image": null,
+      "rating": 0.0
+    }
+  ],
+  "created_at": "2023-05-07T20:15:06.872987Z",
+  "updated_at": "2023-05-07T20:15:06.873015Z"
+}
+```
+
+#### Method: DELETE
+
+<http://localhost:8000/products/cart/8/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Response 204
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+### End-point: cart items
+
+#### Method: GET
+
+<http://localhost:8000/products/cart/8/items/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Response (**raw**) 200
+
+```json
+{
+  "items": [2]
+}
+```
+
+#### Method: PUT
+
+<http://localhost:8000/products/cart/8/items/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Body (**raw**)
+
+- you need to pass the product id in the items list, to update your cart items
+
+```json
+{
+  "items": [1, 2]
+}
+```
+
+#### Response (**raw**) 200
+
+```json
+{
+  "items": [1, 2]
+}
+```
+
+#### Method: DELETE
+
+<http://localhost:8000/products/cart/8/items/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Body (**raw**)
+
+- you need to pass the product id in the items list, to update your cart items
+
+```json
+{
+  "items": [2]
+}
+```
+
+#### Response 204
+
+```json
+{
+  "items": [1]
+}
+```
