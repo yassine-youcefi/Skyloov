@@ -12,7 +12,16 @@ class GetProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
         fields = '__all__'
+        
+class CreateProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Products
+        fields = ['name', 'brand', 'description', 'category', 'price', 'quantity', 'rating']
 
+class UpdateProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Products
+        fields = ('image', )
 
 
 class GetCartSerializer(serializers.ModelSerializer):

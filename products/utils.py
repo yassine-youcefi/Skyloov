@@ -1,7 +1,17 @@
 from PIL import Image
+from io import BytesIO
 
-def resize_image(image_file, size):
-    print('size',size)
-    with Image.open(image_file) as img:
-        img = img.resize(size)
-        return img
+
+def generate_thumbnail(image_path, size):
+    print('size', size)
+    # Open the image file using Pillow
+    img = Image.open(image_path)
+
+    # Generate the thumbnail
+    img.thumbnail((200, 200))
+
+    # Save the thumbnail to the product model
+    thumb_io = BytesIO()
+    img = img.convert('RGB')
+    img.save(thumb_io, format='JPEG')
+    return thumb_io
