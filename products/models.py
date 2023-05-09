@@ -21,6 +21,10 @@ class Products(models.Model):
 
     image = models.ImageField(upload_to='products/', blank=True,
                               null=True, default=None)
+    
+    image_thumbnail = models.ImageField(upload_to='products/', blank=True,
+                              null=True, default=None)
+    
 
     rating = models.FloatField(default=0.0)
 
