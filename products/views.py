@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
 
+import multiprocessing
+
 from .tasks import products_tasks
 from .models import Products, Cart
 from .filters import ProductsFilter
@@ -65,6 +67,8 @@ class ProductImageUploadView(generics.UpdateAPIView):
     queryset = Products.objects.all()
     serializer_class = UpdateProductImageSerializer
     swagger_fake_view = True
+    
+    
 
     def put(self, request, *args, **kwargs):
         if 'image' not in request.FILES:
@@ -76,9 +80,15 @@ class ProductImageUploadView(generics.UpdateAPIView):
         if serializer.is_valid():
             serializer.save()
 
-            products_tasks.product_media_task.delay(product.id)
+            # products_tasks.product_media_task.delay(product.id)
+            process = multiprocessing.Process(target=self.run_celery_task, args=(product.id,))
+            process.start()
+            process.join()
             return Response({'success': 'Image uploaded successfully'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def run_celery_task(self, product_id):
+        products_tasks.product_media_task.delay(product_id)
 
 
 class GetCartListView(generics.ListAPIView):
