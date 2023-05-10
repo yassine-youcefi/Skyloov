@@ -67,7 +67,7 @@ class ProductImageUploadView(generics.UpdateAPIView):
     queryset = Products.objects.all()
     serializer_class = UpdateProductImageSerializer
     swagger_fake_view = True
-    
+    permission_classes = (IsAuthenticated, )
     
 
     def put(self, request, *args, **kwargs):
@@ -81,6 +81,7 @@ class ProductImageUploadView(generics.UpdateAPIView):
             serializer.save()
 
             # products_tasks.product_media_task.delay(product.id)
+            # run the task on separate processe
             process = multiprocessing.Process(target=self.run_celery_task, args=(product.id,))
             process.start()
             process.join()

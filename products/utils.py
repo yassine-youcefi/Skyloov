@@ -3,9 +3,11 @@ from io import BytesIO
 
 
 def generate_thumbnail(image_path):
+    """
+        This funtion generate image thumbnail with (200, 200) size
+    """
     size = (200, 200)
     img = Image.open(image_path)
-    # Generate the thumbnail
     img.thumbnail(size)
     thumb_io = BytesIO()
     img = img.convert('RGB')
