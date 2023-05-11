@@ -258,7 +258,8 @@ python manage.py pytest
       "category": "test",
       "price": "0.00",
       "quantity": 1,
-      "image": null,
+      "image": "http://localhost:8000/media/products/email_lX1jyrd.png",
+      "image_thumbnail": "http://localhost:8000/media/products/test_thumb_uo2fXhN.jpg",
       "rating": 5.0,
       "created_at": "2023-05-06",
       "updated_at": "2023-05-06"

@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -89,14 +89,14 @@ SIMPLE_JWT = {
 
 
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-    'Bearer': {
-        'type': 'apiKey',
-        'name': 'Authorization',
-        'in': 'header',
-        'description': 'JWT authentication token in the format `Bearer <token>`'
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT authentication token in the format `Bearer <token>`'
+        }
     }
-}
 }
 
 
@@ -110,8 +110,14 @@ DATABASES = {
         'PORT':  os.environ.get("DB_PORT"),
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     },
+    'test': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'test_db.sqlite3',
+    }
 }
 
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 
 REDIS_URL = "redis://{host}:{port}/1".format(
