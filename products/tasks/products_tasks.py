@@ -1,5 +1,6 @@
 
 import requests
+import os
 from celery import shared_task
 from connect.mails import MailUtil
 from products.models import Products
@@ -12,6 +13,7 @@ from django.core.files.storage import default_storage
 def product_media_task(product_id):
     product = Products.objects.get(id=product_id)
     image_name = product.image.name.split('/')[1].split('.')[0]
+    current_dir = os.getcwd()
     image_path = default_storage.path(product.image.name)
     thumbnail = generate_thumbnail(image_path)
     product.image_thumbnail.save(f'{image_name}_thumb.jpg', File(thumbnail))

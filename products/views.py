@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 import multiprocessing
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from .tasks import products_tasks
 from .models import Products, Cart
@@ -60,16 +62,41 @@ class CreateProductView(generics.CreateAPIView):
 
 class ProductImageUploadView(generics.UpdateAPIView):
     """
-        Update product images , ['image']
+        Update product images
     """
     model = Products
     fields = ['image']
     queryset = Products.objects.all()
     serializer_class = UpdateProductImageSerializer
-    swagger_fake_view = True
     permission_classes = (IsAuthenticated, )
-    
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'image': openapi.Schema(
+                    type=openapi.TYPE_STRING,
+                    format=openapi.FORMAT_BINARY,
+                    description='The image file to be uploaded.'
+                ),
+            },
+            required=['image'],
+
+        ),
+        manual_parameters=[
+            openapi.Parameter(
+                'category',
+                openapi.IN_QUERY,
+                description='Filter products by category',
+                type=openapi.TYPE_STRING,
+            )
+        ],
+        responses={
+            status.HTTP_200_OK: 'Image uploaded successfully',
+            status.HTTP_400_BAD_REQUEST: 'No image file uploaded',
+            status.HTTP_401_UNAUTHORIZED: 'Authentication credentials were not provided.',
+        },
+    )
     def put(self, request, *args, **kwargs):
         if 'image' not in request.FILES:
             return Response({'error': 'No image file uploaded'}, status=status.HTTP_400_BAD_REQUEST)
@@ -80,9 +107,9 @@ class ProductImageUploadView(generics.UpdateAPIView):
         if serializer.is_valid():
             serializer.save()
 
-            # products_tasks.product_media_task.delay(product.id)
             # run the task on separate processe
-            process = multiprocessing.Process(target=self.run_celery_task, args=(product.id,))
+            process = multiprocessing.Process(
+                target=self.run_celery_task, args=(product.id,))
             process.start()
             process.join()
             return Response({'success': 'Image uploaded successfully'}, status=status.HTTP_200_OK)

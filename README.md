@@ -97,7 +97,7 @@ python manage.py pytest
 <hr>
 <br>
 
-## Connect Application :
+# Connect Application :
 
 ### End-point : connect token
 
@@ -224,7 +224,7 @@ python manage.py pytest
 <hr>
 <br>
 
-## Products Application :
+# Products Application :
 
 ### End-point: products search
 
@@ -299,6 +299,92 @@ python manage.py pytest
 
 - You can also sort the results :
   <http://localhost:8000/products/search/?sort=name>
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+
+### End-point: products create
+
+#### Method: POST
+
+<http://localhost:8000/products/create/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Body (**raw**)
+
+- you need to pass the product id in the items list
+
+```json
+{
+  "name": "string",
+  "brand": "string",
+  "description": "string",
+  "category": "string",
+  "price": "decimal",
+  "quantity": "integer",
+  "rating": "number"
+}
+```
+
+#### Response (**raw**) 200
+
+```json
+{
+  "id": 8,
+  "created_at": "2023/05/10",
+  "updated_at": "2023/05/10",
+  "name": "string",
+  "brand": "string",
+  "description": "string",
+  "category": "string",
+  "price": "10.00",
+  "quantity": 5,
+  "image": null,
+  "image_thumbnail": null,
+  "rating": 2.0
+}
+```  
+
+
+
+⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+
+### End-point: products image upload
+
+#### Method: PUT
+
+<http://localhost:8000/products/4/image_upload/>
+
+#### 🔑 Authentication bearer
+
+| Param | value        | Type   |
+| ----- | ------------ | ------ |
+| token | <your_token> | berear |
+
+#### Body (**raw**)
+
+- you need to pass the product id in the items list
+
+```json
+{
+  "image": "file",
+}
+```
+
+#### Response (**raw**) 200
+
+```json
+{
+    "success": "Image uploaded successfully"
+}
+```  
+
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 

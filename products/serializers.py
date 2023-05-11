@@ -21,7 +21,7 @@ class CreateProductSerializer(serializers.ModelSerializer):
 class UpdateProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
-        fields = ('image', )
+        fields = ['image']
 
 
 class GetCartSerializer(serializers.ModelSerializer):
