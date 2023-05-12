@@ -93,7 +93,7 @@ python manage.py createsuperuser
 3.If you want to run the tests:
 
 ```bash
-python manage.py pytest
+pytest
 ```
 
 <br>
