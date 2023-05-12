@@ -8,9 +8,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key')
 
+# False for production server
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['*']
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://skyloov.youcefi-yassine.com",
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_COOKIE_DOMAIN = '.youcefi-yassine.com'
+CSRF_TRUSTED_ORIGINS = ['https://skyloov.youcefi-yassine.com']
 
 
 # Application definition
@@ -29,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'drf_yasg',
     'celery',
+    "corsheaders",
 
     # Local apps
     'products',
@@ -43,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

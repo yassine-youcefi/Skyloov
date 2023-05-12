@@ -7,13 +7,16 @@
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
 
 ## Skyloov :
 
+  - ### This project is deployed on https://skyloov.youcefi-yassine.com using kubetnets
+
 ### Code challenge for Skyloov Property Portal, This is some of useful links for reviewing and testing the project :
 
-- [Swagger documentation](http://localhost:8000/swagger/)
-- [redocs documentation](http://localhost:8000/redocs/)
+- [Swagger documentation](https://skyloov.youcefi-yassine.com/swagger/)
+- [redocs documentation](https://skyloov.youcefi-yassine.com/redocs/)
 
 ## Requirements
 
@@ -105,7 +108,7 @@ python manage.py pytest
 
 #### Method: POST
 
-<http://localhost:8000/connect/token/>
+<https://skyloov.youcefi-yassine.com/connect/token/>
 
 #### Headers
 
@@ -139,7 +142,7 @@ python manage.py pytest
 
 #### Method: POST
 
-<http://localhost:8000/connect/api/token/verify/>
+<https://skyloov.youcefi-yassine.com/connect/api/token/verify/>
 
 #### Headers
 
@@ -167,7 +170,7 @@ python manage.py pytest
 
 #### Method: GET
 
-<http://localhost:8000/connect/token/refresh/>
+<https://skyloov.youcefi-yassine.com/connect/token/refresh/>
 
 #### Body (**raw**)
 
@@ -194,7 +197,7 @@ python manage.py pytest
 
 #### Method: POST
 
-<http://localhost:8000/connect/signup/>
+<https://skyloov.youcefi-yassine.com/connect/signup/>
 
 #### Body (**raw**)
 
@@ -230,7 +233,7 @@ python manage.py pytest
 
 #### Method: GET
 
-<http://localhost:8000/products/search/>
+<https://skyloov.youcefi-yassine.com/products/search/>
 
 #### 🔑 Authentication bearer
 
@@ -258,8 +261,8 @@ python manage.py pytest
       "category": "test",
       "price": "0.00",
       "quantity": 1,
-      "image": "http://localhost:8000/media/products/email_lX1jyrd.png",
-      "image_thumbnail": "http://localhost:8000/media/products/test_thumb_uo2fXhN.jpg",
+      "image": "https://skyloov.youcefi-yassine.com/media/products/email_lX1jyrd.png",
+      "image_thumbnail": "https://skyloov.youcefi-yassine.com/media/products/test_thumb_uo2fXhN.jpg",
       "rating": 5.0,
       "created_at": "2023-05-06",
       "updated_at": "2023-05-06"
@@ -272,34 +275,34 @@ python manage.py pytest
 
   - name :
 
-    <http://localhost:8000/products/search/?name=test>
+    <https://skyloov.youcefi-yassine.com/products/search/?name=test>
 
   - brand :
 
-    <http://localhost:8000/products/search/?brand=test>
+    <https://skyloov.youcefi-yassine.com/products/search/?brand=test>
 
   - category :
 
-    <http://localhost:8000/products/search/?category=test>
+    <https://skyloov.youcefi-yassine.com/products/search/?category=test>
 
   - price :
 
-    <http://localhost:8000/products/search/?min_price=0&max_price=100>
+    <https://skyloov.youcefi-yassine.com/products/search/?min_price=0&max_price=100>
 
   - quantity :
 
-    <http://localhost:8000/products/search/?min_quantity=0&max_quantity=10>
+    <https://skyloov.youcefi-yassine.com/products/search/?min_quantity=0&max_quantity=10>
 
   - rating :
 
-    <http://localhost:8000/products/search/?rating=5>
+    <https://skyloov.youcefi-yassine.com/products/search/?rating=5>
 
   - created_at :
 
-    <http://localhost:8000/products/search/?created_at=2023-05-05>
+    <https://skyloov.youcefi-yassine.com/products/search/?created_at=2023-05-05>
 
 - You can also sort the results :
-  <http://localhost:8000/products/search/?sort=name>
+  <https://skyloov.youcefi-yassine.com/products/search/?sort=name>
 
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -309,7 +312,7 @@ python manage.py pytest
 
 #### Method: POST
 
-<http://localhost:8000/products/create/>
+<https://skyloov.youcefi-yassine.com/products/create/>
 
 #### 🔑 Authentication bearer
 
@@ -360,7 +363,7 @@ python manage.py pytest
 
 #### Method: PUT
 
-<http://localhost:8000/products/4/image_upload/>
+<https://skyloov.youcefi-yassine.com/products/4/image_upload/>
 
 #### 🔑 Authentication bearer
 
@@ -393,7 +396,7 @@ python manage.py pytest
 
 #### Method: GET
 
-<http://localhost:8000/products/cart/all/>
+<https://skyloov.youcefi-yassine.com/products/cart/all/>
 
 #### 🔑 Authentication bearer
 
@@ -447,7 +450,7 @@ python manage.py pytest
 
 #### Method: GET
 
-<http://localhost:8000/products/cart/8/>
+<https://skyloov.youcefi-yassine.com/products/cart/8/>
 
 #### 🔑 Authentication bearer
 
@@ -495,7 +498,7 @@ python manage.py pytest
 
 #### Method: post
 
-<http://localhost:8000/products/cart/create/>
+<https://skyloov.youcefi-yassine.com/products/cart/create/>
 
 #### 🔑 Authentication bearer
 
@@ -542,7 +545,7 @@ python manage.py pytest
 
 #### Method: DELETE
 
-<http://localhost:8000/products/cart/8/>
+<https://skyloov.youcefi-yassine.com/products/cart/8/>
 
 #### 🔑 Authentication bearer
 
@@ -558,7 +561,7 @@ python manage.py pytest
 
 #### Method: GET
 
-<http://localhost:8000/products/cart/8/items/>
+<https://skyloov.youcefi-yassine.com/products/cart/8/items/>
 
 #### 🔑 Authentication bearer
 
@@ -576,7 +579,7 @@ python manage.py pytest
 
 #### Method: PUT
 
-<http://localhost:8000/products/cart/8/items/>
+<https://skyloov.youcefi-yassine.com/products/cart/8/items/>
 
 #### 🔑 Authentication bearer
 
@@ -604,7 +607,7 @@ python manage.py pytest
 
 #### Method: DELETE
 
-<http://localhost:8000/products/cart/8/items/>
+<https://skyloov.youcefi-yassine.com/products/cart/8/items/>
 
 #### 🔑 Authentication bearer
 
