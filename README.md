@@ -13,7 +13,7 @@
 
   - ### This project is deployed on https://skyloov.youcefi-yassine.com using kubetnets
 
-### Code challenge for Skyloov Property Portal, This is some of useful links for reviewing and testing the project :
+### Skyloov Property Portal, This is some of useful links for reviewing and testing the project :
 
 - [Swagger documentation](https://skyloov.youcefi-yassine.com/swagger/)
 - [redocs documentation](https://skyloov.youcefi-yassine.com/redocs/)

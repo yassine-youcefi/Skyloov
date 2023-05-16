@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 29
+  labels:
+    app: django-skyloov
+  name: django-skyloov
+  namespace: skyloov
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: django-skyloov
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: django-skyloov
+    spec:
+      containers:
+        - args:
+            - python manage.py runserver 0:8000
+          command:
+            - /bin/bash
+            - -c
+          envFrom:
+            - configMapRef:
+                name: skyloov-configmap
+          image: registry.kioserv.com/kio/kio-api:skyloov
+          imagePullPolicy: IfNotPresent
+          name: django-skyloov
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry-credentials
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

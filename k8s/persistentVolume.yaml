@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  finalizers:
+  - kubernetes.io/pv-protection
+  labels:
+    type: local
+  name: mysql-pv
+  resourceVersion: "41104"
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 200Mi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: mysql-pvc
+    namespace: skyloov
+    resourceVersion: "41102"
+  hostPath:
+    path: /mnt/data/skyloov
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  volumeMode: Filesystem
+status:
+  phase: Bound
